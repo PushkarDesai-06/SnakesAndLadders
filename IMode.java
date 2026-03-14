@@ -1,3 +1,3 @@
 public interface IMode {
-  boolean makeTurn(Player p);
+  void makeTurn(Player p);
 }

@@ -22,9 +22,14 @@ public class Displayer {
 
     for (Player player : players) {
       int position = player.getScore();
-      int row = position / board.getSize();
-      int col = position % board.getSize();
-      boardList.get(row).set(col, (char) ('A' + player.getId()));
+      int boardSize = board.getSize() * board.getSize();
+
+      // Only display if position is within valid board range
+      if (position >= 0 && position < boardSize) {
+        int row = position / board.getSize();
+        int col = position % board.getSize();
+        boardList.get(row).set(col, (char) ('A' + player.getId()));
+      }
     }
     // Print the board
     for (int i = boardList.size() - 1; i >= 0; i--) {

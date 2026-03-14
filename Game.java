@@ -13,8 +13,8 @@ public class Game {
     this.players = players;
     dice = new Dice(6);
     board = new Board(n, jumpables);
-    this.mode = new EasyMode(dice, board);
     displayer = new Displayer(this.board, this.players);
+    this.mode = new EasyMode(dice, board, displayer);
   }
 
   public void run() {
@@ -22,8 +22,7 @@ public class Game {
       for (Player player : players) {
         if (player.isHasCompleted())
           continue;
-        boolean playsAgain = mode.makeTurn(player);
-        displayer.display();
+        mode.makeTurn(player);
       }
 
       boolean allCompleted = true;
