@@ -21,15 +21,6 @@ public class Board {
     return position;
   }
 
-  private boolean isSafe(int position) {
-    for (Jumpable jumpable : jumpables) {
-      if (jumpable.getStart() == position) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   public void display() {
     for (int i = 0; i < this.n; i++) {
       for (int j = 0; j < this.n; j++) {

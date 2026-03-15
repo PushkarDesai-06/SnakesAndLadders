@@ -41,4 +41,13 @@ public class Player {
     this.hasCompleted = hasCompleted;
   }
 
+  @Override
+  public String toString() {
+    return "Player [name=" + name + ", score=" + score + ", hasCompleted=" + hasCompleted + "]";
+  }
+
+  public String toScore() {
+    return name + " : " + this.score;
+  }
+
 }

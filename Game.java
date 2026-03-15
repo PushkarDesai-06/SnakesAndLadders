@@ -14,7 +14,7 @@ public class Game {
     dice = new Dice(6);
     board = new Board(n, jumpables);
     displayer = new Displayer(this.board, this.players);
-    this.mode = new EasyMode(dice, board, displayer);
+    this.mode = new DifficultMode(dice, board, displayer);
   }
 
   public void run() {
@@ -23,19 +23,23 @@ public class Game {
         if (player.isHasCompleted())
           continue;
         mode.makeTurn(player);
+
+        sc.nextLine();
       }
 
       boolean allCompleted = true;
+
       for (Player player : players) {
-        allCompleted &= player.isHasCompleted();
+        if (!player.isHasCompleted()) {
+          allCompleted = false;
+          break;
+        }
       }
 
       if (allCompleted) {
         System.out.println("GAME OVER");
         break;
       }
-
-      sc.nextLine();
 
     }
   }

@@ -10,6 +10,7 @@ public class Dice {
   }
 
   public int roll() {
+    // return 6;
     return (int) Math.floor(Math.random() * size + 1);
   }
 

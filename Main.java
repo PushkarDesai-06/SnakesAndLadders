@@ -6,6 +6,7 @@ class Main {
 
     List<Player> players = new ArrayList<>();
     players.add(new Player(0, "Player_1"));
+    players.add(new Player(1, "Player_"));
 
     List<Jumpable> jumpables = List.of(
         new Snake(25, 2),

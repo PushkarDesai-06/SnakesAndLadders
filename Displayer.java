@@ -39,6 +39,11 @@ public class Displayer {
       }
       System.out.println();
     }
+
+    for (Player player : players) {
+      System.out.println(player.toScore());
+    }
+    System.out.println();
   }
 
 }
