@@ -3,7 +3,7 @@ public class DifficultMode implements IMode {
   Dice dice;
   Board board;
   Displayer displayer;
-  final int MAX_ROLES = 3;
+  static final int MAX_ROLES = 3;
 
   public DifficultMode(Dice dice, Board board, Displayer displayer) {
     this.dice = dice;
@@ -22,12 +22,11 @@ public class DifficultMode implements IMode {
       newScore = board.updatePosition(newScore);
 
       // Check if player reached or exceeded the end
-      if (newScore == board.getSize() * board.getSize()) {
-        newScore = board.getSize() * board.getSize();
+      if (newScore == board.getMaxScore()) {
         p.setScore(newScore);
         p.setHasCompleted(true);
         displayer.display();
-      } else if (newScore > board.getSize() * board.getSize()) {
+      } else if (newScore > board.getMaxScore()) {
         displayer.display();
         return;
       }
@@ -37,7 +36,7 @@ public class DifficultMode implements IMode {
       if (roll == 6) {
         sixCount++;
 
-        if (sixCount == this.MAX_ROLES)
+        if (sixCount == DifficultMode.MAX_ROLES)
           return;
       } else {
         rolledSix = false;

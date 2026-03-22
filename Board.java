@@ -30,6 +30,10 @@ public class Board {
     System.out.println();
   }
 
+  public int getMaxScore() {
+    return n * n;
+  }
+
   public int getSize() {
     return n;
   }
