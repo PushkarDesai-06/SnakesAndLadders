@@ -1,5 +1,143 @@
 # Snakes and Ladders - Design Documentation
 
+## Class Diagram
+
+```mermaid
+classDiagram
+    class Board {
+        -int n
+        -List~Jumpable~ jumpables
+        +updatePosition(int position) int
+        +display() void
+        +getMaxScore() int
+        +getSize() int
+    }
+
+    class Dice {
+        -int size
+        +getSize() int
+        +roll() int
+    }
+
+    class IMode {
+        <<interface>>
+        +makeTurn(Player p) void
+    }
+
+    class DifficultMode {
+        -Dice dice
+        -Board board
+        -Displayer displayer
+        -static int MAX_ROLES
+        +makeTurn(Player p) void
+    }
+
+    class EasyMode {
+        -Dice dice
+        -Board board
+        -Displayer displayer
+        +makeTurn(Player p) void
+    }
+
+    class Displayer {
+        -Board board
+        -List~Player~ players
+        +display() void
+    }
+
+    class Game {
+        -IMode mode
+        -Board board
+        -Dice dice
+        -List~Player~ players
+        -Displayer displayer
+        -Scanner sc
+        +run() void
+    }
+
+    class GameObject {
+        -List~Player~ players
+        -List~Jumpable~ jumpables
+        -int currRoll
+        -int currPlayer
+        +getPlayers() List~Player~
+        +setPlayers(List~Player~) void
+        +getJumpables() List~Jumpable~
+        +setJumpables(List~Jumpable~) void
+        +getCurrRoll() int
+        +setCurrRoll(int) void
+        +getCurrPlayer() int
+        +setCurrPlayer(int) void
+    }
+
+    class IDisplay {
+        <<interface>>
+        +display(GameObject gameObject) void
+    }
+
+    class Jumpable {
+        <<interface>>
+        +getStart() int
+        +getEnd() int
+    }
+
+    class Ladder {
+        -int start
+        -int end
+        +getStart() int
+        +getEnd() int
+    }
+
+    class Snake {
+        -int start
+        -int end
+        +getStart() int
+        +getEnd() int
+    }
+
+    class Player {
+        -int id
+        -String name
+        -int score
+        -boolean hasCompleted
+        +getId() int
+        +getName() String
+        +getScore() int
+        +isHasCompleted() boolean
+        +setHasCompleted(boolean) void
+        +toScore() String
+    }
+
+    IMode <|.. DifficultMode
+    IMode <|.. EasyMode
+    Jumpable <|.. Ladder
+    Jumpable <|.. Snake
+
+    Board o-- Jumpable
+
+    DifficultMode --> Dice
+    DifficultMode --> Board
+    DifficultMode --> Displayer
+
+    EasyMode --> Dice
+    EasyMode --> Board
+    EasyMode --> Displayer
+
+    Displayer --> Board
+    Displayer --> Player
+
+    Game *-- IMode
+    Game *-- Board
+    Game *-- Dice
+    Game *-- Player
+    Game *-- Displayer
+
+    GameObject o-- Player
+    GameObject o-- Jumpable
+
+    IDisplay ..> GameObject
+```
+
 ## System Architecture
 
 ### Core Components
